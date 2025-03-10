@@ -1,0 +1,48 @@
+# Visual Studio e Rider
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build e publicações
+bin/
+obj/
+out/
+publish/
+
+# Pacotes e dependências
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+*.nuspec
+*.dll
+*.exe
+
+# Logs e arquivos temporários
+*.log
+*.tlog
+*.cache
+*.pidb
+*.ilk
+*.pdb
+*.sbr
+*.aps
+*.ncb
+*.opendb
+*.VC.db
+
+# Configurações do sistema e IDE
+appsettings.json
+appsettings.Development.json
+secrets.json
+
+# Docker e ambientes
+.dockerignore
+docker-compose.override.yml
+
+# Configurações de depuração
+*.csproj.user
+*.debug

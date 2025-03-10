@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BeFast.Application\BeFast.Application.csproj" />
+    <ProjectReference Include="..\BeFast.Domain\BeFast.Domain.csproj" />
+    <ProjectReference Include="..\BeFast.Infrastructure\BeFast.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IoC\" />
+  </ItemGroup>
+
+</Project>
