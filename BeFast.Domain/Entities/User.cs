@@ -15,6 +15,8 @@ namespace BeFast.Domain.Entities
         public string Address { get; set; }
         public DateTime RegistrationDate { get; set; }
 
+        public ICollection<Restaurants> Restaurants { get; set; } = new List<Restaurants>();
+
         public ICollection<Orders> CustomerOrders { get; set; } = new List<Orders>();
         public ICollection<Orders> DeliveryOrders { get; set; } = new List<Orders>();
     }

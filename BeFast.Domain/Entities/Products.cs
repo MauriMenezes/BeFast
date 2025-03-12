@@ -12,7 +12,9 @@ namespace BeFast.Domain.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
 
-        //fk
-        public string RestaurantsId { get; set; }
+        public int RestaurantId { get; set; }
+        public Restaurants Restaurant { get; set; }
+
+        public ICollection<OrderItens> OrderItens { get; set; } = new List<OrderItens>();
     }
 }

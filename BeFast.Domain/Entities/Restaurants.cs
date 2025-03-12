@@ -13,7 +13,8 @@ namespace BeFast.Domain.Entities
         public string Address { get; set; }
         public string Opening_hours { get; set; }
 
-        // fk
         public int UserId { get; set; }
+        public User User { get; set; }
+        public ICollection<Products> Products { get; set; } = new List<Products>();
     }
 }

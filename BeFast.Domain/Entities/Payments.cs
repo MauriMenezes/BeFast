@@ -10,12 +10,11 @@ namespace BeFast.Domain.Entities
     {
         public int Id { get; set; }
         public PaymentStatus Status { get; set; }
-        public PaymentStatus PaymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        //fk
+
         public int OrdersId { get; set; }
-
-
+        public Orders Order { get; set; }
     }
 }
