@@ -71,8 +71,9 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<int>("RestaurantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
@@ -105,11 +106,13 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentMethod")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -208,8 +211,9 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

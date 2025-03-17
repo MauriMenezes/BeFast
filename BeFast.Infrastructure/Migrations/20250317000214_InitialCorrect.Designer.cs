@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeFast.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250312170854_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250317000214_InitialCorrect")]
+    partial class InitialCorrect
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,8 +74,9 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<int>("RestaurantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
@@ -108,11 +109,13 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentMethod")
-                        .HasColumnType("int");
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -211,8 +214,9 @@ namespace BeFast.Infrastructure.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
