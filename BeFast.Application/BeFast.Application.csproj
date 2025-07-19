@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BeFast.Domain\BeFast.Domain.csproj" />
+    <ProjectReference Include="..\BeFast.Infrastructure\BeFast.Infrastructure.csproj" />
+    <ProjectReference Include="..\BeFast.CrossCutting\BeFast.CrossCutting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
