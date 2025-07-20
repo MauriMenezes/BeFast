@@ -10,7 +10,6 @@ namespace BeFast.Domain.Entities.BaseEntities
     {
         public string? CreatedBy { get; set; }
         public Guid? CreatedById { get; set; }
-
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
 

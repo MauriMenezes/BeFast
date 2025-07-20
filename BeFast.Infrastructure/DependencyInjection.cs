@@ -23,9 +23,6 @@ namespace BeFast.Infrastructure
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             // services.AddScoped<IUserRepository, UserRepository>();
 
-            // Adicione outros repositories aqui
-            // services.AddScoped<IProductRepository, ProductRepository>();
-            // services.AddScoped<IOrderRepository, OrderRepository>();
 
             return services;
         }
