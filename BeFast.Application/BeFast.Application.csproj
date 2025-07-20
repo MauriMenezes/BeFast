@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,8 +7,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BeFast.Domain\BeFast.Domain.csproj" />
-    <ProjectReference Include="..\BeFast.Infrastructure\BeFast.Infrastructure.csproj" />
     <ProjectReference Include="..\BeFast.CrossCutting\BeFast.CrossCutting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+  <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,5 +24,4 @@
     <Folder Include="Mappings\" />
     <Folder Include="Services\" />
   </ItemGroup>
-
 </Project>

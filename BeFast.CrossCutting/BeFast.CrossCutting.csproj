@@ -1,19 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- SEM ProjectReference - apenas packages externos -->
   <ItemGroup>
-    <ProjectReference Include="..\BeFast.Application\BeFast.Application.csproj" />
-    <ProjectReference Include="..\BeFast.Domain\BeFast.Domain.csproj" />
-    <ProjectReference Include="..\BeFast.Infrastructure\BeFast.Infrastructure.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IoC\" />
-  </ItemGroup>
-
 </Project>
