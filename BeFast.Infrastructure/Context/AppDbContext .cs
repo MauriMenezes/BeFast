@@ -25,6 +25,21 @@ namespace BeFast.Infrastructure.Context
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
+            modelBuilder.Entity<User>()
+                .Property(u => u.Type)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (UserType)Enum.Parse(typeof(UserType), v));
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.CreatedAt)
+                .HasDefaultValueSql("GETDATE()");
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.IsActive)
+                .HasDefaultValue(true);
+
+
             base.OnModelCreating(modelBuilder);
         }
     }
