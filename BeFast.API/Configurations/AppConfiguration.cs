@@ -9,10 +9,9 @@ namespace BeFast.API.Configurations
     {
         public static WebApplication AddAppConfiguration(this WebApplication app)
         {
-            // Configure the application pipeline
             app.UseHttpsRedirection();
             app.UseRouting();
-            // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.MapControllers();
 

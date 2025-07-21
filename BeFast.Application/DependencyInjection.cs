@@ -14,7 +14,7 @@ namespace BeFast.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             // MediatR
             // services.AddMediatR(cfg =>
