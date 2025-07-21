@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BeFast.Application.DTOs;
 using BeFast.Application.DTOs.User;
 using BeFast.Application.Interfaces;
@@ -50,11 +46,26 @@ namespace BeFast.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var result = await _authService.UserInfo();
+
+            if (result.IsSuccess)
+                return Ok(result.Result);
+
+            return BadRequest(result.Error);
+        }
+
+
+        [Authorize(Roles = "Customer")]
         [HttpGet("test")]
         public IActionResult Test()
         {
             return Ok("Autenticado");
         }
+
+
 
     }
 }

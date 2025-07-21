@@ -12,6 +12,7 @@ using BeFast.CrossCutting.extension;
 using BeFast.Domain.Entities;
 using BeFast.Domain.Entities.BaseEntities;
 using BeFast.Domain.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -24,16 +25,17 @@ namespace BeFast.Application.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly PasswordHasher<object> _passwordHasher;
-
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IBaseRepository<User> repository, IMapper mapper, IUserRepository userRepository, IConfiguration configuration) : base(repository, mapper)
+        public AuthService(IBaseRepository<User> repository, IMapper mapper, IUserRepository userRepository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(repository, mapper)
         {
 
             _mapper = mapper;
             _passwordHasher = new PasswordHasher<object>();
             _userRepository = userRepository;
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ErroOr<User>> Register(UserDto dto)
@@ -75,7 +77,8 @@ namespace BeFast.Application.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.Name)
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JwtSettings:SecretKey")));
 
@@ -91,5 +94,22 @@ namespace BeFast.Application.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public async Task<ErroOr<UserResponse>> UserInfo()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim is null || !Guid.TryParse(userIdClaim.Value, out Guid userId))
+                return ErroOr<UserResponse>.Failure("Usuário não autenticado.");
+
+            var user = await base.GetById(userId);
+            if (user.Result == null)
+                return ErroOr<UserResponse>.Failure("Usuário não encontrado.");
+
+            var response = _mapper.Map<UserResponse>(user.Result);
+
+            return ErroOr<UserResponse>.Success(response);
+        }
+
     }
 }

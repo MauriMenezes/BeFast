@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,7 @@ namespace BeFast.API.Configurations
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
@@ -57,22 +59,8 @@ namespace BeFast.API.Configurations
                  ValidateIssuerSigningKey = true,
                  ValidIssuer = configuration["JwtSettings:Issuer"],
                  ValidAudience = configuration["JwtSettings:Audience"],
-                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]))
-             };
-
-             // Eventos de autenticação
-             options.Events = new JwtBearerEvents
-             {
-                 OnAuthenticationFailed = context =>
-                 {
-                     Console.WriteLine($"Authentication failed: {context.Exception.Message}");
-                     return Task.CompletedTask;
-                 },
-                 OnTokenValidated = context =>
-                 {
-                     Console.WriteLine("Token validated successfully.");
-                     return Task.CompletedTask;
-                 }
+                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
+                 RoleClaimType = ClaimTypes.Role
              };
          });
 

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using BeFast.Application.DTOs;
 using BeFast.Application.DTOs.User;
 using BeFast.CrossCutting.extension;
@@ -13,5 +10,6 @@ namespace BeFast.Application.Interfaces
     {
         Task<ErroOr<User>> Register(UserDto user);
         Task<ErroOr<string>> Authenticate(loginDto login);
+        Task<ErroOr<UserResponse>> UserInfo();
     }
 }
