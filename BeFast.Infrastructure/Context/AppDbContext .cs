@@ -22,6 +22,16 @@ namespace BeFast.Infrastructure.Context
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<User>()
+                .Property(u => u.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.PasswordHash)
+                .IsRequired();
+
+
+            modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
