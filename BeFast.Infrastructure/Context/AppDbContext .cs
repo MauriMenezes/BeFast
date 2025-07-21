@@ -36,10 +36,10 @@ namespace BeFast.Infrastructure.Context
                 .IsUnique();
 
             modelBuilder.Entity<User>()
-                .Property(u => u.Type)
+                .Property(u => u.UserRole)
                 .HasConversion(
                     v => v.ToString(),
-                    v => (UserType)Enum.Parse(typeof(UserType), v));
+                    v => (UserRole)Enum.Parse(typeof(UserRole), v));
 
             modelBuilder.Entity<User>()
                 .Property(u => u.CreatedAt)

@@ -35,7 +35,6 @@ project.assets.json
 *.VC.db
 
 # Configurações do sistema e IDE
-appsettings.json
 appsettings.Development.json
 secrets.json
 
