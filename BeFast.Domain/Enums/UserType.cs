@@ -8,7 +8,6 @@ namespace BeFast.Domain.Enums
     public enum UserType
     {
         Customer,
-        DeliveryPerson,
         Admin
 
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeFast.Application.DTOs;
 using BeFast.Application.Interfaces;
 using BeFast.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -19,17 +20,15 @@ namespace BeFast.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] User user)
+        [HttpPost("register")]
+        public async Task<IActionResult> register([FromBody] UserDto user)
         {
-            var result = await _userService.Add(user);
+            var result = await _userService.Register(user);
             if (result.IsSuccess)
-            {
-                return CreatedAtRoute("GetUserById", new { id = result.Result.Id }, result.Result);
-            }
+                return Created();
+
             return BadRequest(result.Error);
         }
-
 
         [HttpGet("{id}", Name = "GetUserById")]
         public async Task<IActionResult> GetUserByIdAsync(Guid id)
@@ -37,6 +36,5 @@ namespace BeFast.API.Controllers
             var user = await _userService.GetById(id);
             return Ok(user.Result);
         }
-
     }
 }
