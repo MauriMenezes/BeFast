@@ -11,6 +11,6 @@ namespace BeFast.Application.DTOs
         public String Name { get; set; } = string.Empty;
         public String Password { get; set; } = string.Empty;
         public String Email { get; set; } = string.Empty;
-        public UserRole UserRole { get; set; }
+        public Role Role { get; set; }
     }
 }

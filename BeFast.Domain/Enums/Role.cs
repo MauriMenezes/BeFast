@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BeFast.Domain.Enums
 {
-    public enum UserRole
+    public enum Role
     {
         Customer,
         Admin
