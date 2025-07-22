@@ -8,5 +8,12 @@ namespace BeFast.Domain.Entities.BaseEntities
     public class Base
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public bool IsActive { get; set; }
+
+
+        public Base()
+        {
+            IsActive = true;
+        }
     }
 }
