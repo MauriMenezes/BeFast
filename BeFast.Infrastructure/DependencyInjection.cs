@@ -22,6 +22,7 @@ namespace BeFast.Infrastructure
             // Repositories
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
             // services.AddScoped<IUserRepository, UserRepository>();
 
 

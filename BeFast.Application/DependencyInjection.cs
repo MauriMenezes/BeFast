@@ -15,6 +15,7 @@ namespace BeFast.Application
         {
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IPlayerService, PlayerService>();
 
             // MediatR
             // services.AddMediatR(cfg =>

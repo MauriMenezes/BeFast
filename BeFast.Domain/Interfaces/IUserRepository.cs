@@ -9,9 +9,6 @@ namespace BeFast.Domain.Interfaces
 {
     public interface IUserRepository
     {
-
         Task<ErroOr<User>> GetByEmail(string email);
-
-
     }
 }
