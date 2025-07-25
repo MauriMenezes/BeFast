@@ -9,7 +9,7 @@ namespace BeFast.Application.Interfaces
     public interface IAuthService : IBaseService<User>
     {
         Task<ErroOr<User>> Register(UserDto user);
-        Task<ErroOr<string>> Authenticate(loginDto login);
+        Task<ErroOr<LoginResponse>> Authenticate(loginDto login);
         Task<ErroOr<UserResponse>> UserInfo();
     }
 }

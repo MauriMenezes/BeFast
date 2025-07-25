@@ -57,17 +57,21 @@ namespace BeFast.Application.Services
             return false;
         }
 
-        public async Task<ErroOr<string>> Authenticate(loginDto login)
+        public async Task<ErroOr<LoginResponse>> Authenticate(loginDto login)
         {
             var user = await _userRepository.GetByEmail(login.Email);
 
             if (user.Result is null || !IsPasswordCorrect(user.Result, login.Password, user.Result.PasswordHash))
             {
-                return ErroOr<string>.Failure("Email ou senha inválidos");
+                return ErroOr<LoginResponse>.Failure("Email ou senha inválidos");
             }
-            string token = GenerateToken(user.Result);
 
-            return ErroOr<string>.Success(token);
+            var response = new LoginResponse
+            {
+                Token = GenerateToken(user.Result)
+            };
+
+            return ErroOr<LoginResponse>.Success(response);
         }
 
         private string GenerateToken(User user)

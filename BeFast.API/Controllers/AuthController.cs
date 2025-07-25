@@ -19,42 +19,68 @@ namespace BeFast.API.Controllers
         }
 
         [HttpPost("login")]
+
+        [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login([FromBody] loginDto loginDto)
         {
             var result = await _authService.Authenticate(loginDto);
 
-            if (result.IsSuccess)
-            {
-                return Ok(result.Result);
-            }
-            else
-            {
-                return BadRequest(result.Error);
-            }
+            if (!result.IsSuccess)
+                return BadRequest(new ProblemDetails
+                {
+                    Title = "Erro ao realizar login",
+                    Detail = result.Error,
+                    Status = StatusCodes.Status400BadRequest
+                });
+
+            return Ok(result.Result);
+
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
             var result = await _authService.Register(userDto);
 
             if (result.IsSuccess)
-                return CreatedAtAction(nameof(Login), new { email = userDto.Email }, result.Result);
+                return BadRequest(new ProblemDetails
+                {
+                    Title = "Erro ao registar o Usuario",
+                    Detail = result.Error,
+                    Status = StatusCodes.Status400BadRequest
 
-            return BadRequest(result.Error);
+                });
+
+            return Ok();
+
 
         }
 
         [Authorize]
         [HttpGet("me")]
+        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+
         public async Task<IActionResult> GetUserInfo()
         {
             var result = await _authService.UserInfo();
 
             if (result.IsSuccess)
-                return Ok(result.Result);
+                return BadRequest(new ProblemDetails
+                {
+                    Title = "Erro ao Buscar Info do Usuario",
+                    Detail = result.Error,
+                    Status = StatusCodes.Status400BadRequest
+                }
+                );
 
-            return BadRequest(result.Error);
+            return Ok(result);
         }
 
 
